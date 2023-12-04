@@ -13,7 +13,7 @@
 
         <meta-data
             android:name="xposeddescription"
-            android:value="仅适用于MIUI，进入/退出 刷卡页面时自动 开启/关闭 NFC\n酷安@迷璐" />
+            android:value="仅适用于MIUI，进入/退出 刷卡页面时自动 开启/关闭 NFC" />
 
         <meta-data
             android:name="xposedminversion"
