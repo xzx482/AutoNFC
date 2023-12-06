@@ -95,7 +95,7 @@ object HookEntry : IYukiHookXposedInit {
                         emptyParam()
                     }
                     beforeHook {
-                        if(!isAutoNFCEnabled)return
+                        if(!isAutoNFCEnabled)return@beforeHook
                         isAutoNFCEnabled=false
                         NfcAdapter::class.java.method {
                             name = "getDefaultAdapter"
