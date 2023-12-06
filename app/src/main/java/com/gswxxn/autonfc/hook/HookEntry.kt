@@ -19,6 +19,8 @@ import kotlinx.coroutines.launch
 
 @InjectYukiHookWithXposed
 object HookEntry : IYukiHookXposedInit {
+private const val TAG: String = "HookEntry"
+
     override fun onInit() = configs {
         debugLog { tag = "AutoNFC" }
         isDebug = BuildConfig.DEBUG
