@@ -19,7 +19,10 @@ import kotlinx.coroutines.launch
 
 @InjectYukiHookWithXposed
 object HookEntry : IYukiHookXposedInit {
-private const val TAG: String = "HookEntry"
+    private const val TAG: String = "HookEntry"
+
+    private var isAutoNFCEnabled = false
+
 
     override fun onInit() = configs {
         debugLog { tag = "AutoNFC" }
@@ -60,6 +63,8 @@ private const val TAG: String = "HookEntry"
                         }.get().call(appContext).let { nfcAdapter ->
                             if (nfcAdapterHelper("isEnabled", nfcAdapter).boolean()) return@afterHook
 
+                            isAutoNFCEnabled = true
+
                             nfcAdapterHelper("enable", nfcAdapter).call()
 
                             MainScope().launch {
@@ -90,6 +95,8 @@ private const val TAG: String = "HookEntry"
                         emptyParam()
                     }
                     beforeHook {
+                        if(!isAutoNFCEnabled)return
+                        isAutoNFCEnabled=false
                         NfcAdapter::class.java.method {
                             name = "getDefaultAdapter"
                             param(ContextClass)
